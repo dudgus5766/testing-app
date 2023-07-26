@@ -6,6 +6,7 @@ import useTheme from './hooks/useTheme';
 import {lightTheme, darkTheme} from './styles/theme';
 import {ThemeProvider} from 'styled-components';
 import Navigation from './navigation';
+import 'react-native-devsettings';
 
 const defaultValue = {
   // ThemeContext의 기본 값
