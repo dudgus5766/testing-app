@@ -1,14 +1,25 @@
 import type {
   CompositeScreenProps,
   NavigatorScreenParams,
+  RouteProp,
 } from '@react-navigation/native';
-import type {StackScreenProps} from '@react-navigation/stack';
+import type {
+  StackNavigationProp,
+  StackScreenProps,
+} from '@react-navigation/stack';
 import type {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
-import {RouteNames} from './src/navigation/routeNames';
+import {InvestTabRouteNames, RouteNames} from './src/navigation/routeNames';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   NotFound: undefined;
+};
+
+export type InvestTabStackParamList = {
+  [InvestTabRouteNames.Home]: undefined;
+  [InvestTabRouteNames.ProductDetail]: {id: number};
+  [InvestTabRouteNames.Basket]: undefined;
 };
 
 export type RootStackScreenProps<T extends keyof RootStackParamList> =
@@ -25,6 +36,16 @@ export type RootTabScreenProps<T extends keyof RootTabParamList> =
     BottomTabScreenProps<RootTabParamList, T>,
     RootStackScreenProps<keyof RootStackParamList>
   >;
+
+export type InvestTabScreenProps<T extends keyof InvestTabStackParamList> = {
+  navigation: NativeStackScreenProps<InvestTabStackParamList, T>;
+  route: RouteProp<InvestTabStackParamList, T>;
+};
+
+// export type InvestTabScreenProps = CompositeScreenProps<
+//   BottomTabScreenProps<RootTabParamList, RouteNames.InvestTab>,
+//   StackScreenProps<InvestTabStackParamList>
+// >;
 
 declare global {
   namespace ReactNavigation {

@@ -6,10 +6,15 @@ import FastImage from 'react-native-fast-image';
 import Spacing from '../spacing';
 import {Title, Text} from '../styles';
 
-export default function ProductCard(item: Product) {
+type productCardProps = {
+  item: Product;
+  onPress: () => void;
+};
+
+export default function ProductCard({item, onPress}: productCardProps) {
   const {title, price, rating, image} = item;
   return (
-    <ProductContainer>
+    <ProductContainer onPress={onPress}>
       <ProductImage source={{uri: image}} />
       <Spacing height={12} />
       <Title numberOfLines={1}>{title}</Title>

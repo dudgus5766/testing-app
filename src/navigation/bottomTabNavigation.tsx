@@ -5,9 +5,9 @@ import {RouteNames} from './routeNames';
 import {CustomThemeContext} from '../app';
 import {lightTheme, darkTheme} from '../styles/theme';
 
-import HomeTabScreen from '../screens/Home';
 import MyScreen from '../screens/My';
-import InvestScreen from '../screens/Invest';
+import HomeNavigation from './homeNavigation';
+import InvestNavigation from './investNavigation';
 
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
@@ -38,14 +38,14 @@ export default function BottomTabNavigator() {
       }}>
       <BottomTab.Screen
         name={RouteNames.HomeTab}
-        component={HomeTabScreen}
+        component={HomeNavigation}
         options={{
           tabBarLabel: RouteNames.HomeTab,
         }}
       />
       <BottomTab.Screen
         name={RouteNames.InvestTab}
-        component={InvestScreen}
+        component={InvestNavigation}
         options={{
           tabBarLabel: RouteNames.InvestTab,
         }}
