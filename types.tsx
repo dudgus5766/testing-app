@@ -3,13 +3,10 @@ import type {
   NavigatorScreenParams,
   RouteProp,
 } from '@react-navigation/native';
-import type {
-  StackNavigationProp,
-  StackScreenProps,
-} from '@react-navigation/stack';
+import type {StackScreenProps} from '@react-navigation/stack';
 import type {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 import {InvestTabRouteNames, RouteNames} from './src/navigation/routeNames';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
@@ -38,7 +35,7 @@ export type RootTabScreenProps<T extends keyof RootTabParamList> =
   >;
 
 export type InvestTabScreenProps<T extends keyof InvestTabStackParamList> = {
-  navigation: NativeStackScreenProps<InvestTabStackParamList, T>;
+  navigation: NativeStackNavigationProp<InvestTabStackParamList, T>;
   route: RouteProp<InvestTabStackParamList, T>;
 };
 
