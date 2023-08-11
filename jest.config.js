@@ -19,7 +19,6 @@ module.exports = {
   setupFilesAfterEnv: [
     './jest.setup.ts',
     '@testing-library/jest-native/extend-expect',
-    'jest-styled-components',
   ],
   transformIgnorePatterns: [
     `node_modules/(?!(${[

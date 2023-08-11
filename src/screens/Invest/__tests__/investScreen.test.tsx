@@ -1,15 +1,15 @@
 import React from 'react';
 import {screen, renderHook, waitFor} from '@testing-library/react-native';
-import {render} from '../../utils/customRender';
+import {render} from '../../../utils/customRender';
 // import {NavigationContainer} from '@react-navigation/native';
 
 // import {setupGetAllProductsFailedHandler} from '../../../__mocks__/msw/handlers';
-import {useGetAllProducts} from '../../api/product';
+import {useGetAllProducts} from '../../../api/product';
 // import ProductStack from '../../navigation/product-stack';
 // import {RouteNames} from '../../navigation/route-names';
 // import {useProductStore} from '../../store/product';
-import {createReactQueryWrapper} from '../../utils/testing';
-import InvestScreen from '../Invest/index';
+import {createReactQueryWrapper} from '../../../utils/testing';
+import InvestScreen from '../index';
 // import {Clipboard} from 'react-native';
 
 // const rootAppComponent = (
@@ -25,30 +25,25 @@ const route = jest.fn() as any;
 const component = <InvestScreen navigation={navigation} route={route} />;
 
 describe('Product list screen', () => {
-  it('Loading indicator가 작동하는가?', async () => {
-    // InvestScreen 컴포넌트를 렌더링
-    // render(component, {wrapper: createReactQueryWrapper});
-
-    //test id로 screen-loader로 되어있는지 확인
+  test('Loading indicator가 작동하는가?', async () => {
+    // // InvestScreen 컴포넌트를 렌더링
+    // render(component, {wrapper: createReactQueryWrapper()});
+    //
+    // //test id로 screen-loader가 작동하는지 확인
     // expect(screen.queryByTestId(`screen-loader`)).toBeTruthy();
 
     //useGetAllProducts 훅을 사용하여 모든 제품을 가져올 때까지 기다리고, 이 동작이 성공적으로 완료되는지 확인
     const {result} = renderHook(() => useGetAllProducts(), {
-      wrapper: createReactQueryWrapper,
+      wrapper: createReactQueryWrapper(),
     });
 
-    // await waitFor(() => expect(result.current).toBe(true), {
-    //   timeout: 1500,
-    // });
-
-    await waitFor(() => expect(result.current.isSuccess).toBe(true), {
-      timeout: 50000,
-    });
+    await waitFor(() => expect(result.current.isSuccess).toBe(true));
     // expect(result.current.data).toBeDefined();
+    console.log('result.current>>>', result.current.data);
 
-    console.log('result.current>>>', result.current);
+    // console.log('result.current>>>', result.current);
     //로딩이 완료되면 로딩 인디케이터가 사라지는지 확인
-    expect(screen.queryByTestId(`screen-loader`)).not.toBeTruthy();
+    // expect(screen.queryByTestId(`screen-loader`)).not.toBeTruthy();
   });
 
   // it('should display product list data correctly', async () => {

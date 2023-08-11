@@ -1,26 +1,30 @@
 import type {
   CompositeScreenProps,
   NavigatorScreenParams,
-  RouteProp,
 } from '@react-navigation/native';
 import type {StackScreenProps} from '@react-navigation/stack';
 import type {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
-import {InvestTabRouteNames, RouteNames} from './src/navigation/routeNames';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RouteNames, UpperStackNames} from './src/navigation/routeNames';
 
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
+  UpperStack: NavigatorScreenParams<UpperStackParamList> | undefined;
   NotFound: undefined;
 };
 
-export type InvestTabStackParamList = {
-  [InvestTabRouteNames.Home]: undefined;
-  [InvestTabRouteNames.ProductDetail]: {id: number};
-  [InvestTabRouteNames.Basket]: undefined;
+export type UpperStackParamList = {
+  [UpperStackNames.ProductDetail]: {id: number};
+  [UpperStackNames.ProductInvestDetail]: undefined;
 };
 
 export type RootStackScreenProps<T extends keyof RootStackParamList> =
   StackScreenProps<RootStackParamList, T>;
+
+export type UpperStackScreenProps<T extends keyof UpperStackParamList> =
+  CompositeScreenProps<
+    StackScreenProps<UpperStackParamList, T>,
+    RootStackScreenProps<keyof RootStackParamList>
+  >;
 
 export type RootTabParamList = {
   [RouteNames.HomeTab]: undefined;
@@ -33,16 +37,6 @@ export type RootTabScreenProps<T extends keyof RootTabParamList> =
     BottomTabScreenProps<RootTabParamList, T>,
     RootStackScreenProps<keyof RootStackParamList>
   >;
-
-export type InvestTabScreenProps<T extends keyof InvestTabStackParamList> = {
-  navigation: NativeStackNavigationProp<InvestTabStackParamList, T>;
-  route: RouteProp<InvestTabStackParamList, T>;
-};
-
-// export type InvestTabScreenProps = CompositeScreenProps<
-//   BottomTabScreenProps<RootTabParamList, RouteNames.InvestTab>,
-//   StackScreenProps<InvestTabStackParamList>
-// >;
 
 declare global {
   namespace ReactNavigation {

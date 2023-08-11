@@ -21,12 +21,7 @@ export default function InvestNavigation() {
       }}
       initialRouteName={InvestTabRouteNames.Home}>
       <Stack.Screen name={InvestTabRouteNames.Home} component={InvestScreen} />
-      <Stack.Screen
-        name={InvestTabRouteNames.ProductDetail}
-        component={InvestDetailScreen}
-        options={{headerShown: false}}
-        initialParams={{id: 1}}
-      />
+
       {/*<Stack.Screen*/}
       {/*  options={{*/}
       {/*    headerTitle: 'Loading...',*/}

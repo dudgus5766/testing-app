@@ -3,6 +3,11 @@ export enum RouteNames {
   InvestTab = '투자',
   MyTab = '마이',
 }
+
+export enum UpperStackNames {
+  ProductDetail = 'product-detail',
+  ProductInvestDetail = 'product-invest-detail',
+}
 export enum HomeTabRouteNames {
   Home = 'home',
 }

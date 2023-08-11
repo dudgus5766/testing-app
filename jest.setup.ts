@@ -3,6 +3,9 @@ import {mswServer} from './__mocks__/msw/handlers';
 
 jest.useFakeTimers();
 
+// https://mswjs.io/docs/getting-started/integrate/node#setup
+
+// Establish API mocking before all tests.
 beforeAll(() => mswServer.listen());
 // Reset any request handlers that we may add during the tests,
 // so they don't affect other tests.

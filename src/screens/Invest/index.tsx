@@ -2,30 +2,26 @@ import React, {useCallback} from 'react';
 import {FlatList, ListRenderItemInfo} from 'react-native';
 import {Product} from '../../types';
 import {useGetAllProducts} from '../../api/product';
-import {
-  useProductActions,
-  useProductsInBasket,
-  useProductsInBasketCount,
-} from '../../store/product';
+import {useProductActions, useProductsInBasket} from '../../store/product';
 import ProductCard from '../../components/invest/productCard';
-import Loading from '../../components/loading';
-import Spacing from '../../components/spacing';
-import {Container, FlexCenter, Text} from '../../components/styles';
-import {InvestTabRouteNames} from '../../navigation/routeNames';
-import {InvestTabScreenProps} from '../../../types';
+import Loading from '../../components/common/loading';
+import Spacing from '../../components/common/spacing';
+import {FlexCenter, Text} from '../../components/styles';
+import {RouteNames, UpperStackNames} from '../../navigation/routeNames';
+import SafeAreaWrapper from '../../components/common/safeAreaWrapper';
+import {RootTabScreenProps} from '../../../types';
 
 export default function InvestScreen({
   navigation,
-}: InvestTabScreenProps<InvestTabRouteNames.Home>) {
-  const {data, isLoading, refetch, isError, isSuccess} = useGetAllProducts();
+}: RootTabScreenProps<RouteNames.InvestTab>) {
+  const {data, isLoading, isError, isSuccess} = useGetAllProducts();
   const productsInBasket = useProductsInBasket();
   const {addProductToBasket, removeProductFromBasket} = useProductActions();
-  const productsInBasketCount = useProductsInBasketCount();
-
-  console.log('productsInBasketCount>>>', productsInBasketCount);
+  // const productsInBasketCount = useProductsInBasketCount();
   const onPressProductCard = (productId: number) => {
-    navigation?.navigate(InvestTabRouteNames.ProductDetail, {
-      id: productId,
+    navigation?.navigate('UpperStack', {
+      screen: UpperStackNames.ProductDetail,
+      params: {id: productId},
     });
   };
 
@@ -69,7 +65,7 @@ export default function InvestScreen({
   }
 
   return (
-    <Container>
+    <SafeAreaWrapper>
       {isError && (
         <FlexCenter>
           <Text>An error occurred</Text>
@@ -88,6 +84,6 @@ export default function InvestScreen({
           keyExtractor={getKeyExtractor}
         />
       )}
-    </Container>
+    </SafeAreaWrapper>
   );
 }

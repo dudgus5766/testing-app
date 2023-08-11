@@ -1,4 +1,4 @@
-import {create} from 'zustand';
+import {createWithEqualityFn} from 'zustand/traditional';
 import {shallow} from 'zustand/shallow';
 import {Product} from '../types';
 
@@ -50,42 +50,45 @@ export type ProductStore = {
   };
 };
 
-export const useProductStore = create<ProductStore>((set, get) => ({
-  productsInBasket: [],
-  actions: {
-    addProductToBasket: product =>
-      set({
-        productsInBasket: [
-          ...get().productsInBasket,
-          {product: product, quantity: 1},
-        ],
-      }),
-    removeProductFromBasket: productId =>
-      set({
-        productsInBasket: [
-          ...get().productsInBasket.filter(
-            productInBasket => productInBasket.product.id !== productId,
+export const useProductStore = createWithEqualityFn<ProductStore>(
+  (set, get) => ({
+    productsInBasket: [],
+    actions: {
+      addProductToBasket: product =>
+        set({
+          productsInBasket: [
+            ...get().productsInBasket,
+            {product: product, quantity: 1},
+          ],
+        }),
+      removeProductFromBasket: productId =>
+        set({
+          productsInBasket: [
+            ...get().productsInBasket.filter(
+              productInBasket => productInBasket.product.id !== productId,
+            ),
+          ],
+        }),
+      increaseProductQuantityInBasket: productId => {
+        set({
+          productsInBasket: increaseProductQuantityInBasket(
+            get().productsInBasket,
+            productId,
           ),
-        ],
-      }),
-    increaseProductQuantityInBasket: productId => {
-      set({
-        productsInBasket: increaseProductQuantityInBasket(
-          get().productsInBasket,
-          productId,
-        ),
-      });
+        });
+      },
+      decreaseProductQuantityInBasket: productId => {
+        set({
+          productsInBasket: decreaseProductQuantityInBasket(
+            get().productsInBasket,
+            productId,
+          ),
+        });
+      },
     },
-    decreaseProductQuantityInBasket: productId => {
-      set({
-        productsInBasket: decreaseProductQuantityInBasket(
-          get().productsInBasket,
-          productId,
-        ),
-      });
-    },
-  },
-}));
+  }),
+  shallow,
+);
 
 export const useProductActions = () => useProductStore(state => state.actions);
 

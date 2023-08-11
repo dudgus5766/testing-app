@@ -11,7 +11,7 @@ import InvestNavigation from './investNavigation';
 
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
-export default function BottomTabNavigator() {
+export default function BottomTabNavigation() {
   const {theme} = useContext(CustomThemeContext);
   const isDarkMode = theme === 'dark';
 
@@ -19,6 +19,7 @@ export default function BottomTabNavigator() {
     <BottomTab.Navigator
       initialRouteName={RouteNames.HomeTab}
       screenOptions={{
+        headerShown: false,
         tabBarActiveTintColor: isDarkMode
           ? darkTheme.color.main
           : lightTheme.color.main,

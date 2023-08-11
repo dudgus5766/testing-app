@@ -1,8 +1,9 @@
 import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import BottomTabNavigator from './bottomTabNavigation';
 
-import {RootStackParamList} from '../../types';
+import {RootStackParamList, UpperStackParamList} from '../../types';
+import BottomTabNavigation from './bottomTabNavigation';
+import UpperStackNavigation from './UpperStackNavigation';
 
 /**
  * [ Navigation ]
@@ -26,7 +27,12 @@ function RootNavigator() {
     <Stack.Navigator>
       <Stack.Screen
         name="Root"
-        component={BottomTabNavigator}
+        component={BottomTabNavigation}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="UpperStack"
+        component={UpperStackNavigation}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

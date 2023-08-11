@@ -16,6 +16,10 @@ export const Row = styled.View`
   align-items: center;
 `;
 
+export const JustifySpaceBetween = styled(Row)`
+  justify-content: space-between;
+`;
+
 export const Title = styled.Text`
   font-size: 20px;
   font-weight: bold;
@@ -24,4 +28,8 @@ export const Title = styled.Text`
 
 export const Text = styled.Text`
   color: ${props => props.theme.color?.text};
+`;
+
+export const SubText = styled.Text`
+  color: ${props => props.theme.color?.subText};
 `;

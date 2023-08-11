@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {Pressable} from 'react-native';
 import {Product} from '../../types';
 import FastImage from 'react-native-fast-image';
-import Spacing from '../spacing';
+import Spacing from '../common/spacing';
 import {Title, Text} from '../styles';
 
 type productCardProps = {

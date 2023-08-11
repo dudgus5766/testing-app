@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {ActivityIndicator, View} from 'react-native';
-import {FlexCenter} from './styles';
+import {FlexCenter} from '../styles';
 
 export default function Loading() {
   return (
